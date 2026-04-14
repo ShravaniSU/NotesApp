@@ -1,0 +1,8 @@
+{
+  "name": "ai-service",
+  "version": "1.0.0",
+  "main": "src/ai.js",
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
