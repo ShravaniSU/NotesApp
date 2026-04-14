@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const NoteEditor = ({ note, onSave }) => {
   const [title, setTitle] = useState(note.title);
@@ -19,7 +19,7 @@ const NoteEditor = ({ note, onSave }) => {
 
   const handleSummarize = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/summarize', { content }, {
+      const res = await api.post('/api/ai/summarize', { content }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setAiResult(res.data.summary);
@@ -30,7 +30,7 @@ const NoteEditor = ({ note, onSave }) => {
 
   const handleKeyPoints = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/key-points', { content }, {
+      const res = await api.post('/api/ai/key-points', { content }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setAiResult(res.data.keyPoints);
@@ -41,7 +41,7 @@ const NoteEditor = ({ note, onSave }) => {
 
   const handleAsk = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/ask', { content, question }, {
+      const res = await api.post('/api/ai/ask', { content, question }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setAiResult(res.data.answer);

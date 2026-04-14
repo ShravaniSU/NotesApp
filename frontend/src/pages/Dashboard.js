@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 import Sidebar from '../components/Sidebar';
 import NoteEditor from '../components/NoteEditor';
 
@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   const fetchNotes = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/notes', {
+      const res = await api.get('/api/notes', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setNotes(res.data);
@@ -37,13 +37,13 @@ const Dashboard = () => {
   const handleSaveNote = async (note) => {
     try {
       if (note.id === 'new') {
-        const res = await axios.post('http://localhost:5000/api/notes', note, {
+        const res = await api.post('/api/notes', note, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         setNotes([res.data, ...notes]);
         setSelectedNote(res.data);
       } else {
-        await axios.put(`http://localhost:5000/api/notes/${note.id}`, note, {
+        await api.put(`/api/notes/${note.id}`, note, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         setNotes(notes.map(n => n.id === note.id ? note : n));
