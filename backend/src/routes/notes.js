@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const notesController = require('../controllers/notesController');
+const { authenticateToken } = require('../middleware/auth');
+
+router.use(authenticateToken);
 
 router.get('/', notesController.getNotes);
 router.get('/:id', notesController.getNote);
