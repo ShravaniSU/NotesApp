@@ -10,6 +10,9 @@ services:
       - DATABASE_URL=postgresql://postgres:happyData%2117@db:5432/notes_app
       - JWT_SECRET=your_secret_key
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LOG_LEVEL=info
+    volumes:
+      - ./backend/logs:/app/logs
     depends_on:
       - db
     restart: always
