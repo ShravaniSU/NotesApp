@@ -1,0 +1,7 @@
+notes.shravaniurankar.xyz {
+    reverse_proxy localhost:3000
+}
+
+api.notes.shravaniurankar.xyz {
+    reverse_proxy localhost:5000
+}
