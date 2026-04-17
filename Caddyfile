@@ -3,18 +3,5 @@ notes.shravaniurankar.xyz {
 }
 
 api.notes.shravaniurankar.xyz {
-    # Allow the UI to talk to the API
-    header {
-        Access-Control-Allow-Origin "https://notes.shravaniurankar.xyz"
-        Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-        Access-Control-Allow-Headers "Content-Type, Authorization"
-    }
-
-    # Handle the "Preflight" request (browsers send this before a POST)
-    @cors_preflight method OPTIONS
-    reverse_proxy @cors_preflight localhost:5000 {
-        header_up Host {host}
-    }
-
     reverse_proxy localhost:5000
 }
